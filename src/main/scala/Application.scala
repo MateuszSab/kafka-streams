@@ -1,13 +1,9 @@
 import java.util.Properties
 import org.apache.kafka.streams.scala.ImplicitConversions._
 import org.apache.kafka.streams.scala.serialization.Serdes._
-import org.apache.kafka.streams.{KafkaStreams, StreamsConfig, Topology}
+import org.apache.kafka.streams.{StreamsConfig, Topology}
 
-case class Application(multiplication: String,
-                       topicInputW: String,
-                       topicInputNum: String,
-                       topicOutW: String,
-                       topicOutNum: String) {
+case class Application(multiplication: String, topicInputW: String, topicInputNum: String, topicOutW: String, topicOutNum: String) {
 
   import org.apache.kafka.streams.scala._
 
@@ -16,6 +12,7 @@ case class Application(multiplication: String,
     p.put(StreamsConfig.APPLICATION_ID_CONFIG, "Kafka App")
     p.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, ":9092")
     p.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 0)
+    p.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String.getClass.getName)
     p
   }
 
@@ -32,10 +29,8 @@ case class Application(multiplication: String,
     val builder2 = new StreamsBuilder
     builder2
       .stream[String, String](topicInputNum)
-      .mapValues(n => if (n.contains('-')) ("negative number: " + n.toInt * multiply.toInt) else (n.toInt * multiply.toInt).toString )
+      .mapValues(n => if (n.contains('-')) "negative number: " + n.toInt * multiply.toInt else (n.toInt * multiply.toInt).toString )
       .to(topicOutNum)
     builder2.build
   }
-
-
 }

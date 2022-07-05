@@ -12,7 +12,7 @@ scalaVersion := "2.13.8"
 
 Kafka Steams
 
-## run
+## run kafka
 
 kafka zookeeper
 
@@ -28,12 +28,16 @@ kafka consumer --topic `inputINT` (for example)
 
 kafka consumer --topic `outputINT` (for example)
 
-### application arguments 
+## To run application:
 
-1. multiplication: number to multiple 
-2. topicInputW: input topic for words
-3. topicInputNum: output topic for words
-4. topicOutW: input topic for numbers
-5. topicOutNum: output topic for numbers
+### application arguments
 
-for example `sbt run 5 inputW outputW inputINT outputINT`
+1. multiplication: -m number to multiple 
+2. topicInputW: -t input topic for words
+3. topicInputNum: -n output topic for words
+4. topicOutW: -p input topic for numbers
+5. topicOutNum: -o output topic for numbers
+
+Example od terminal command: `sbt 'run -m 5 -t inputW -n outputW -p inputINT -o outputINT'`
+
+Or modify run configuration of a file Main and run from your IDE

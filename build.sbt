@@ -14,3 +14,4 @@ libraryDependencies += "org.slf4j" % "slf4j-reload4j" % "1.7.36"
 libraryDependencies += "org.apache.kafka" % "kafka-streams-test-utils" % "3.1.0"
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.12"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.12" % Test
+libraryDependencies += "com.github.scopt" %% "scopt" % "4.0.1"
